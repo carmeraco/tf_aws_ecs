@@ -3,14 +3,9 @@ output "cluster_id" {
 }
 
 output "autoscaling_group" {
-#  value = "${map(
-#    "id", "${aws_autoscaling_group.ecs.id}",
-#    "name", "${aws_autoscaling_group.ecs.name}",
-#    "arn", "${aws_autoscaling_group.ecs.arn}",
-#  )}"
   value = {
-    id = "${aws_autoscaling_group.ecs.id}"
+    id   = "${aws_autoscaling_group.ecs.id}"
     name = "${aws_autoscaling_group.ecs.name}"
-    arn = "${aws_autoscaling_group.ecs.arn}"
+    arn  = "${aws_autoscaling_group.ecs.arn}"
   }
 }
