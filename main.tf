@@ -65,6 +65,7 @@ resource "aws_autoscaling_group" "ecs" {
   max_size                  = "${var.max_servers}"
   desired_capacity          = "${var.servers}"
   wait_for_capacity_timeout = "${var.wait_for_capacity_timeout}"
+  load_balancers            = ["${var.load_balancers}"]
 
   termination_policies = [
     "OldestLaunchConfiguration",
