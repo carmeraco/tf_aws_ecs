@@ -43,12 +43,12 @@ resource "aws_launch_configuration" "ecs" {
     delete_on_termination = true
   }
 
-  ebs_block_device {
+  ebs_block_device = ["${concat(list({
     device_name           = "/dev/xvdcz"
     volume_size           = "${var.docker_storage_size}"
     volume_type           = "${var.docker_storage_type}"
     delete_on_termination = true
-  }
+  }), $var.ebs_block_devices)}"]
 
   user_data = "${coalesce(var.user_data, data.template_file.user_data.rendered)}"
 

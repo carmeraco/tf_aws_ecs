@@ -45,7 +45,6 @@ variable "docker_storage_type" {
   description = "EBS Volume type that the ECS Instance uses for Docker images and metadata "
 }
 
-
 variable "dockerhub_email" {
   default     = ""
   description = "Email Address used to authenticate to dockerhub. http://docs.aws.amazon.com/AmazonECS/latest/developerguide/private-auth.html"
@@ -149,4 +148,9 @@ variable "load_balancers" {
 
 variable "vpc_id" {
   description = "The AWS VPC ID which you want to deploy your instances"
+}
+
+variable "ebs_block_devices" {
+  type    = "list"
+  default = []
 }
