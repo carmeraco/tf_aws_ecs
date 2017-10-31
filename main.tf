@@ -28,6 +28,16 @@ data "aws_vpc" "vpc" {
   id = "${var.vpc_id}"
 }
 
+
+locals {
+  docker_container_storage = [{
+    device_name           = "/dev/xvdcz"
+    volume_size           = "${var.docker_storage_size}"
+    volume_type           = "${var.docker_storage_type}"
+    delete_on_termination = true
+  }]
+}
+
 resource "aws_launch_configuration" "ecs" {
   name_prefix                 = "${coalesce(var.name_prefix, "ecs-${var.name}-")}"
   image_id                    = "${var.ami == "" ? format("%s", data.aws_ami.ecs_ami.id) : var.ami}"   # Workaround until 0.9.6
@@ -43,12 +53,7 @@ resource "aws_launch_configuration" "ecs" {
     delete_on_termination = true
   }
 
-  ebs_block_device {
-    device_name           = "/dev/xvdcz"
-    volume_size           = "${var.docker_storage_size}"
-    volume_type           = "${var.docker_storage_type}"
-    delete_on_termination = true
-  }
+  ebs_block_device = "${concat(local.docker_container_storage, var.ebs_block_devices)}"
 
   user_data = "${coalesce(var.user_data, data.template_file.user_data.rendered)}"
 
