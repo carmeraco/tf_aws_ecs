@@ -84,10 +84,6 @@ variable "instance_type" {
   description = "AWS Instance type, if you change, make sure it is compatible with AMI, not all AMIs allow all instance types "
 }
 
-variable "key_name" {
-  description = "SSH key name in your AWS account for AWS instances."
-}
-
 variable "min_servers" {
   description = "Minimum number of ECS servers to run."
   default     = 1

@@ -12,8 +12,8 @@ This Module currently supports Terraform 0.10.x, but does not require it. If you
 Module Input Variables
 ----------------------
 #### Required
+
 - `name` - ECS cluster name
-- `key_name` - An EC2 key pair name
 - `subnet_id` - A list of subnet IDs
 - `vpc_id` - The VPC ID to place the cluster in
 
